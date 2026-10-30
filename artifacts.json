@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "publication": {
-    "status": "repository_created",
+    "status": "partially_published",
     "repository": "research-lab-2026/jailbreak-vaccine",
-    "release": "latest"
+    "release": "v1.0.0"
   },
   "artifacts": {
     "lora": {
@@ -15,7 +15,9 @@
         "checkpoints/safety_lora/best_val_loss_safety_lora/README.md": "e482e76ee685e365bd50310cef27ad932b15f42683c434dbc7720b21fac481a6",
         "checkpoints/safety_lora/best_val_loss_safety_info.json": "f122e7ebafdc1b3e51efaefa0f68078dec43930f9ffd2ed4d65f9b89368d9eb6",
         "checkpoints/safety_lora/training_config.json": "58e51924553180335289380b9f93ea9fb49928cbe84b34e2e845689003883008"
-      }
+      },
+      "status": "published",
+      "download_url": "https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip"
     },
     "vision_calibrator": {
       "filename": "jailbreak_vaccine_vision_calibrator.zip",
@@ -26,7 +28,9 @@
         "models/clip_noise_finetuned_safety_checker/best/config.json": "6fe46897bc14a1c17a042b1345bc3da3215efe172fc40235c7943a029f5f4f50",
         "models/clip_noise_finetuned_safety_checker/best/preprocessor_config.json": "64a49623964ac5cd407d449ae72ea66b58eb05c62fbc55e5d1ea3dc6cbaf4cea",
         "models/clip_noise_finetuned_safety_checker/best/metrics.json": "d30a7368af52333ebe7340c26ed500a17d6074372b521c1e0c644eebec5c66d9"
-      }
+      },
+      "status": "pending_manual_upload",
+      "download_url": null
     }
   }
 }

@@ -15,18 +15,19 @@ outside this release directory are unchanged.
 
 ## Downloads
 
-| Artifact | Release asset | Contents |
+| Artifact | Availability | Contents |
 | --- | --- | --- |
-| Best SD1.4 LoRA | `jailbreak_vaccine_sd14_best_safety.zip` | One selected adapter, model card, and checkpoint selection/provenance JSON |
-| Vision Calibrator | `jailbreak_vaccine_vision_calibrator.zip` | Finetuned checker weights, configuration, preprocessing, and recorded metrics |
-| Code and prompt data | `anonymous_code_data.zip` | This repository and the six CSV inputs |
+| Best SD1.4 LoRA | [Download v1.0.0 LoRA ZIP](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip) | One selected adapter, model card, and checkpoint selection/provenance JSON |
+| Vision Calibrator | Local `jailbreak_vaccine_vision_calibrator.zip`; online upload pending | Finetuned checker weights, configuration, preprocessing, and recorded metrics |
+| Code and prompt data | Repository contents; local `anonymous_code_data.zip` bundle | This repository and the six CSV inputs |
 
-**Hosting status: repository created; model assets pending publication.**
+**Hosting status: LoRA published; Vision Calibrator upload pending.**
 The public repository is [research-lab-2026/jailbreak-vaccine](https://github.com/research-lab-2026/jailbreak-vaccine).
-The trained-model ZIP assets are prepared locally but have not yet been
-published as GitHub Release downloads. No live model download link is claimed.
-See [download and installation instructions](docs/DOWNLOADS.md) for local
-installation and the command to use after the assets are published.
+The best-safety LoRA is available from the fixed **v1.0.0** Release link above.
+The Vision Calibrator archive remains local and has not been published as a
+downloadable Release asset; no working online checker link is claimed.
+See [download and installation instructions](docs/DOWNLOADS.md) for the
+verified LoRA command and local checker installation.
 Archive and file hashes are recorded in `artifacts.json` and `SHA256SUMS`.
 
 The public SD1.4, normal safety checker, and CLIP weights are obtained from
