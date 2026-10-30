@@ -4,79 +4,71 @@
 
 The public repository is
 [research-lab-2026/jailbreak-vaccine](https://github.com/research-lab-2026/jailbreak-vaccine).
-[Release v1.0.0](https://github.com/research-lab-2026/jailbreak-vaccine/releases/tag/v1.0.0)
-is published and contains the verified
-[`jailbreak_vaccine_sd14_best_safety.zip`](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip).
+[Release v1.0.0](https://github.com/research-lab-2026/jailbreak-vaccine/releases/tag/v1.0.0) contains both verified
+trained artifacts:
 
-The Vision Calibrator upload failed in the browser. Its failed upload slot may
-remain in the release editor, but the public Release does not contain that
-asset. `artifacts.json` therefore records `partially_published`, with the LoRA
-`published` and the checker `pending_manual_upload`. No working online checker
-link is claimed.
+- [Selected best-safety SD1.4 LoRA](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip)
+- [Vision Calibrator](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_vision_calibrator.zip)
 
-## Complete the remaining checker upload manually
+`artifacts.json` records `published` for both artifacts and the overall model
+publication status. The tensor files and model ZIP bytes are unchanged from
+the supplied artifacts; the archive and per-file SHA-256 values are recorded
+in `artifacts.json` and `SHA256SUMS`.
 
-1. Open the existing [v1.0.0 Release](https://github.com/research-lab-2026/jailbreak-vaccine/releases/tag/v1.0.0)
-   and choose **Edit**. Reuse this Release; the verified LoRA does not need to be
-   uploaded again.
-2. Inspect the attachment list. If a failed placeholder for
-   `jailbreak_vaccine_vision_calibrator.zip` is shown, remove only that failed
-   entry before retrying. Keep the published LoRA attachment unchanged.
-3. Attach the local `jailbreak_vaccine_vision_calibrator.zip` file
-   (1,215,983,626 bytes). If the browser reports another upload error, retry the
-   manual upload from a suitable browser/network session; do not mark it as
-   published merely because a filename appears in the editor.
-4. Wait for the attachment to show a completed upload, then save with
-   **Update release**. Reopen the public Release page and confirm the checker
-   filename and size appear as a downloadable asset.
-5. Verify that the actual checker download matches its recorded SHA-256 in
-   `artifacts.json`. Only then change its artifact status to `published`, add
-   its fixed v1.0.0 download URL, and update the README/download instructions.
-   Until then, retain the pending status and local-archive installation method.
+## Code snapshots
 
-The ordinary Git file limit is 100 MiB, so the checker belongs in a Release
-attachment rather than a normal source-code commit. The three public base
-model dependencies are obtained from their upstream sources, not uploaded here.
+[The refreshed code/data bundle](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/anonymous_code_data_published.zip) contains the code,
+six CSV inputs, and publication documentation matching the update on `main`.
+The original `anonymous_code_data.zip` is retained in the Release as an earlier
+review snapshot. GitHub's automatically generated source ZIP/tar files for
+tag `v1.0.0` contain the initial tagged source, before the publication
+documentation updates. The existing tag and all existing assets are retained.
 
-## Repository contents and rebuilding
+The root `.gitignore` excludes weights, generated output, caches, and local
+ZIPs. The six prompt CSVs and their documentation are included in ordinary
+commits. The large trained checker is distributed as a Release attachment.
+The three public model dependencies are downloaded from their upstream sources.
+`anonymous_weights.zip` is an optional local installation bundle containing
+the same selected LoRA and checker, with no other LoRA tensor file.
 
-The contents of `anonymous_code_data.zip` form the repository. The root
-`.gitignore` excludes weights, generated output, caches, and local ZIPs; the
-six prompt CSVs and their documentation are included in ordinary commits.
-`anonymous_weights.zip` is an optional local-installation bundle containing the
-same selected LoRA and checker, with no other LoRA tensor file.
+## Download and verify
 
-Readers can use `scripts/download_artifacts.py` for the published LoRA; it
-checks archive/file hashes and protects different existing files. The current
-fixed command is:
+Readers can install both artifacts with archive and per-file verification:
 
 ```bash
 python scripts/download_artifacts.py --artifact lora --repo research-lab-2026/jailbreak-vaccine --release v1.0.0
+python scripts/download_artifacts.py --artifact vision_calibrator --repo research-lab-2026/jailbreak-vaccine --release v1.0.0
+python scripts/verify_release.py
 ```
 
-From the complete local artifact directory, rebuild archives and checksums with:
+The installer protects different existing files. Use `--dry_run` to inspect a
+download plan, or `--archive PATH` to install an already-downloaded ZIP.
+See [downloads](DOWNLOADS.md) for exact asset sizes and hashes.
+
+## Rebuilding
+
+From a complete local artifact directory, rebuild archives and checksums with:
 
 ```bash
-python scripts/build_release.py
+python scripts/build_release.py --output_dir /path/to/new-build-directory
 ```
 
 The builder requires the trained files locally and never downloads the public
-model dependencies. Its generated artifact records must retain the verified
-publication status/URL fields before the final checksum manifest and code ZIP
-are republished. Do not modify a published model archive without updating its
-recorded checksum and verifying the replacement asset.
+model dependencies. It retains artifact publication status/download URLs when
+the rebuilt archive identity and hashes match the verified published asset.
+Changed model archives are marked `not_published` and their download URLs are
+cleared until the new bytes have actually been uploaded and verified.
 
-The LoRA's fixed download URL is:
-
-```text
-https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip
-```
+Build into a separate directory to preserve existing local archives. Publish
+updated code bundles under a distinct filename, as done with
+`anonymous_code_data_published.zip`, rather than replacing an earlier review snapshot. A changed
+code/documentation file requires refreshing `SHA256SUMS` before publishing.
 
 See [GitHub's release-link documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/linking-to-releases)
 for the distinction between fixed-tag and latest-release asset URLs.
 
-Use the review venue's permitted anonymous hosting/identity settings. Repository
-ownership, commit author identities, uploader accounts, and public profiles can
-reveal authorship independently of file contents. No previous Git history or
-account credentials are included. No source-code license is selected on behalf
-of the authors; retain applicable upstream notices.
+Use the review venue's permitted anonymous hosting/identity settings.
+Repository ownership, commit author identities, uploader accounts, and public
+profiles can reveal authorship independently of file contents. No previous
+Git history or account credentials are included. No source-code license is
+selected on behalf of the authors; retain applicable upstream notices.
