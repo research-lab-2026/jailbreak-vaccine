@@ -2,42 +2,40 @@
 
 ## Publication status
 
-The public repository has been created at
+The public repository is
 [research-lab-2026/jailbreak-vaccine](https://github.com/research-lab-2026/jailbreak-vaccine).
-**Model asset publication is pending: there is no live public LoRA download
-yet.** The ZIP files are prepared locally and have not been uploaded as GitHub
-Release assets. The assets must be published before a reviewer can download
-these trained weights over the internet. Repository creation alone does not
-publish the model ZIPs.
+The selected **best-safety SD1.4 LoRA is published in Release v1.0.0**:
+
+[Download jailbreak_vaccine_sd14_best_safety.zip](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip)
+
+The **Vision Calibrator online upload is still pending**. Its trained archive
+is prepared locally, but it is not currently available as a published Release
+asset. Do not treat its local filename or an inferred GitHub URL as a working
+online download.
 
 ## Best-safety LoRA only
 
-The independent asset is `jailbreak_vaccine_sd14_best_safety.zip` (about 12.8 MB).
+The published asset is `jailbreak_vaccine_sd14_best_safety.zip` (about 12.8 MB).
 It contains only the selected adapter plus its README, selection record, and
-anonymized training configuration. It does not include final/intermediate or
-other best-metric LoRA weights.
+anonymized training configuration. No final/intermediate or other best-metric
+LoRA weights are distributed.
 
-Extract it at the repository root, or install from a local path:
+Download and install the fixed, verified Release:
+
+```bash
+python scripts/download_artifacts.py --artifact lora --repo research-lab-2026/jailbreak-vaccine --release v1.0.0
+```
+
+Add `--dry_run` to inspect the URL and expected checksums without downloading.
+The archive and every installed file are verified against `artifacts.json`.
+Identical existing files are accepted; different files are protected.
+
+Alternatively, download the ZIP using the link above, then extract it at the
+repository root or install the local copy:
 
 ```bash
 python scripts/download_artifacts.py --artifact lora --archive /path/to/jailbreak_vaccine_sd14_best_safety.zip
 ```
-
-After it is published on a public GitHub Release:
-
-```bash
-python scripts/download_artifacts.py --artifact lora --repo OWNER/REPO --release TAG
-```
-
-For the latest Release, omit `--release TAG`. Add `--dry_run` to inspect the
-constructed URL before downloading. `OWNER/REPO` and `TAG` must be replaced by
-the actual published repository/tag; the script does not create or publish a
-repository or Release.
-
-For another HTTPS host, pass `--url` pointing to the exact published ZIP. The
-archive must match the recorded SHA-256; the script also verifies every file
-before installation. An installation already containing identical files is
-accepted, while different existing files are protected.
 
 The adapter installs at:
 
@@ -45,20 +43,22 @@ The adapter installs at:
 checkpoints/safety_lora/best_val_loss_safety_lora/pytorch_lora_weights.safetensors
 ```
 
-Inference uses this supplied checkpoint by default when present. Select it
-explicitly with `--lora_path checkpoints/safety_lora/best_val_loss_safety_lora`.
+Inference selects this supplied checkpoint by default when present. Use
+`--lora_path checkpoints/safety_lora/best_val_loss_safety_lora` to select it
+explicitly. The Vision Calibrator is not required for ordinary LoRA inference.
 
-## Vision Calibrator
+## Vision Calibrator: local installation only for now
 
-The checker is a separate asset so inference users need not download it:
+The checker archive has not been published online. If you already have its
+local `jailbreak_vaccine_vision_calibrator.zip`, install it with:
 
 ```bash
 python scripts/download_artifacts.py --artifact vision_calibrator --archive /path/to/jailbreak_vaccine_vision_calibrator.zip
-python scripts/download_artifacts.py --artifact vision_calibrator --repo OWNER/REPO --release TAG
 ```
 
 It installs under `models/clip_noise_finetuned_safety_checker/best/` and is
-needed for LoRA training, not ordinary LoRA inference.
+needed for LoRA training. An online command or download link will be added
+only after that exact asset has been uploaded and verified.
 
 ## Public models
 
