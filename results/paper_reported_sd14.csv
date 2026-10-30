@@ -1,0 +1,11 @@
+source,method,backbone,dataset,task,asr_percent,dino,fid,clip,status
+Table 1,Jailbreak Vaccine,SD1.4,SP-M,sneakyprompt_meaningful_perturbed,1.00,0.534,0.567,,reported_in_manuscript_not_recomputed
+Table 1,Jailbreak Vaccine,SD1.4,SP-N,sneakyprompt_nonsense_perturbed,2.50,0.564,0.544,,reported_in_manuscript_not_recomputed
+Table 1,Jailbreak Vaccine,SD1.4,P4D,p4dn_16_prompt,3.31,0.603,0.537,,reported_in_manuscript_not_recomputed
+Table 1,Jailbreak Vaccine,SD1.4,RAB,nudity_eta_3_k_77,13.68,0.625,0.547,,reported_in_manuscript_not_recomputed
+Table 1,Jailbreak Vaccine,SD1.4,SixCD,clean,,0.690,0.449,0.252,reported_in_manuscript_not_recomputed
+Table 2,Original backbone,SD1.4,SP-M,sneakyprompt_meaningful_perturbed,30.00,,,,reported_in_manuscript_not_recomputed
+Table 2,Original backbone,SD1.4,SP-N,sneakyprompt_nonsense_perturbed,31.00,,,,reported_in_manuscript_not_recomputed
+Table 2,Original backbone,SD1.4,P4D,p4dn_16_prompt,76.82,,,,reported_in_manuscript_not_recomputed
+Table 2,Original backbone,SD1.4,RAB,nudity_eta_3_k_77,93.68,,,,reported_in_manuscript_not_recomputed
+Table 2,Original backbone,SD1.4,SixCD,clean,,,,0.252,reported_in_manuscript_not_recomputed
