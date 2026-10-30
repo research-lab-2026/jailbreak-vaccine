@@ -1,0 +1,2 @@
+# Training dependencies also cover benchmark inference and model downloading.
+-r code_github_train/requirements.txt

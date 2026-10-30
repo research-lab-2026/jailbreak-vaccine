@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+.cache/
+*.tmp
+*.zip
+/output/
+/checkpoints/
+/models/*
+!/models/README.md
+!/models/public_models.json
