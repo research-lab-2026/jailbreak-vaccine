@@ -32,6 +32,18 @@ def pack(output, root, paths, compression):
             raise ValueError(f"ZIP integrity verification failed: {output.name}")
 
 
+def retain_verified_publication(previous, rebuilt):
+    """Retain hosting claims only for an archive whose verified bytes are unchanged."""
+    identity = ("filename", "bytes", "sha256", "files")
+    if all(previous.get(field) == rebuilt[field] for field in identity):
+        for field in ("status", "download_url"):
+            if field in previous:
+                rebuilt[field] = previous[field]
+    elif previous:
+        rebuilt.update(status="not_published", download_url=None)
+    return rebuilt
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project_root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -56,8 +68,11 @@ def main(argv=None):
     }
     publication = dict(status="not_published", repository=None, release="latest")
     manifest_file = root / "artifacts.json"
+    previous_artifacts = {}
     if manifest_file.is_file():
-        publication.update(json.loads(manifest_file.read_text(encoding="utf-8")).get("publication", {}))
+        previous_manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
+        publication.update(previous_manifest.get("publication", {}))
+        previous_artifacts = previous_manifest.get("artifacts", {})
     manifest = dict(schema_version=1, publication=publication, artifacts={})
     archives = []
     trained_paths = []
@@ -68,10 +83,14 @@ def main(argv=None):
                 raise FileNotFoundError(path)
         output = destination / filename
         pack(output, root, paths, zipfile.ZIP_STORED)
-        manifest["artifacts"][key] = dict(filename=filename, bytes=output.stat().st_size,
-                                         sha256=sha256(output), files={relative: sha256(root / relative) for relative in relative_paths})
+        rebuilt = dict(filename=filename, bytes=output.stat().st_size,
+                       sha256=sha256(output), files={relative: sha256(root / relative) for relative in relative_paths})
+        manifest["artifacts"][key] = retain_verified_publication(previous_artifacts.get(key, {}), rebuilt)
         trained_paths.extend(paths)
         archives.append(output)
+    if any(artifact.get("status") == "not_published" for artifact in manifest["artifacts"].values()):
+        publication["status"] = ("partially_published" if any(artifact.get("status") == "published"
+                                  for artifact in manifest["artifacts"].values()) else "not_published")
     manifest_file.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     trees = {"code_github_train", "code_github_eval", "data", "docs", "scripts", "tests", "results"}
