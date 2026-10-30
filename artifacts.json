@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "publication": {
-    "status": "partially_published",
+    "status": "published",
     "repository": "research-lab-2026/jailbreak-vaccine",
     "release": "v1.0.0"
   },
@@ -29,8 +29,8 @@
         "models/clip_noise_finetuned_safety_checker/best/preprocessor_config.json": "64a49623964ac5cd407d449ae72ea66b58eb05c62fbc55e5d1ea3dc6cbaf4cea",
         "models/clip_noise_finetuned_safety_checker/best/metrics.json": "d30a7368af52333ebe7340c26ed500a17d6074372b521c1e0c644eebec5c66d9"
       },
-      "status": "pending_manual_upload",
-      "download_url": null
+      "status": "published",
+      "download_url": "https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_vision_calibrator.zip"
     }
   }
 }

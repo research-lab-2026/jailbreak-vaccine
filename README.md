@@ -18,17 +18,19 @@ outside this release directory are unchanged.
 | Artifact | Availability | Contents |
 | --- | --- | --- |
 | Best SD1.4 LoRA | [Download v1.0.0 LoRA ZIP](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_sd14_best_safety.zip) | One selected adapter, model card, and checkpoint selection/provenance JSON |
-| Vision Calibrator | Local `jailbreak_vaccine_vision_calibrator.zip`; online upload pending | Finetuned checker weights, configuration, preprocessing, and recorded metrics |
-| Code and prompt data | Repository contents; local `anonymous_code_data.zip` bundle | This repository and the six CSV inputs |
+| Vision Calibrator | [Download v1.0.0 Vision Calibrator ZIP](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/jailbreak_vaccine_vision_calibrator.zip) | Finetuned checker weights, configuration, preprocessing, and recorded metrics |
+| Code and prompt data | [Download refreshed code/data ZIP](https://github.com/research-lab-2026/jailbreak-vaccine/releases/download/v1.0.0/anonymous_code_data_published.zip) or clone this repository | Training and inference code, documentation, and six CSV inputs |
 
-**Hosting status: LoRA published; Vision Calibrator upload pending.**
+**Hosting status: both trained artifacts are published in Release v1.0.0.**
 The public repository is [research-lab-2026/jailbreak-vaccine](https://github.com/research-lab-2026/jailbreak-vaccine).
-The best-safety LoRA is available from the fixed **v1.0.0** Release link above.
-The Vision Calibrator archive remains local and has not been published as a
-downloadable Release asset; no working online checker link is claimed.
-See [download and installation instructions](docs/DOWNLOADS.md) for the
-verified LoRA command and local checker installation.
-Archive and file hashes are recorded in `artifacts.json` and `SHA256SUMS`.
+See [download and installation instructions](docs/DOWNLOADS.md) for commands
+that verify the archives and every installed file against `artifacts.json`.
+`SHA256SUMS` records the complete supplied-file checksums.
+
+The refreshed code/data ZIP includes the publication documentation now on
+`main`. The original `anonymous_code_data.zip` is retained as an earlier review
+snapshot. GitHub's automatic source archives for tag `v1.0.0` contain the
+initial tagged source, before these publication documentation updates.
 
 The public SD1.4, normal safety checker, and CLIP weights are obtained from
 [their official repositories](models/README.md); they are not bundled.
@@ -43,11 +45,10 @@ python -m pip install -r requirements.txt
 python scripts/download_models.py --models stable-diffusion-v1-4
 ```
 
-Extract `jailbreak_vaccine_sd14_best_safety.zip` into the repository root, or
-install it with checksum verification:
+Install the selected LoRA from the fixed Release with checksum verification:
 
 ```bash
-python scripts/download_artifacts.py --artifact lora --archive /path/to/jailbreak_vaccine_sd14_best_safety.zip
+python scripts/download_artifacts.py --artifact lora --release v1.0.0
 python code_github_eval/infer.py --check_only
 python code_github_eval/infer.py --model_alias jailbreak_vaccine_sd14
 ```
@@ -86,7 +87,7 @@ Download the remaining public models and install the supplied Vision Calibrator:
 
 ```bash
 python scripts/download_models.py
-python scripts/download_artifacts.py --artifact vision_calibrator --archive /path/to/jailbreak_vaccine_vision_calibrator.zip
+python scripts/download_artifacts.py --artifact vision_calibrator --release v1.0.0
 python code_github_train/train.py --check_only
 python code_github_train/train.py
 ```
