@@ -10,6 +10,9 @@ SCRIPT = Path(__file__).resolve().parents[1] / "scripts/download_artifacts.py"
 SPEC = importlib.util.spec_from_file_location("download_artifacts", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
+BUILD_SPEC = importlib.util.spec_from_file_location("build_release", SCRIPT.with_name("build_release.py"))
+BUILDER = importlib.util.module_from_spec(BUILD_SPEC)
+BUILD_SPEC.loader.exec_module(BUILDER)
 
 
 class ArtifactInstallationTests(unittest.TestCase):
@@ -65,6 +68,25 @@ class ArtifactInstallationTests(unittest.TestCase):
                          "https://github.com/review/repository/releases/download/v1/best.zip")
         with self.assertRaises(ValueError):
             MODULE.release_asset_url("../invalid/repository", "latest", "best.zip")
+
+
+class PublicationMetadataTests(unittest.TestCase):
+    def test_identical_archive_retains_verified_download(self):
+        identity = dict(filename="best.zip", bytes=4, sha256="a" * 64,
+                        files={"weights.bin": "b" * 64})
+        previous = dict(identity, status="published", download_url="https://example.org/best.zip")
+        self.assertEqual(BUILDER.retain_verified_publication(previous, dict(identity)), previous)
+
+    def test_changed_archive_invalidates_verified_download(self):
+        previous = dict(filename="best.zip", bytes=4, sha256="a" * 64,
+                        files={"weights.bin": "b" * 64}, status="published",
+                        download_url="https://example.org/best.zip")
+        rebuilt = dict(previous, sha256="c" * 64)
+        rebuilt.pop("status")
+        rebuilt.pop("download_url")
+        result = BUILDER.retain_verified_publication(previous, rebuilt)
+        self.assertEqual(result["status"], "not_published")
+        self.assertIsNone(result["download_url"])
 
 
 if __name__ == "__main__":
