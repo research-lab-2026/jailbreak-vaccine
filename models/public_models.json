@@ -1,0 +1,93 @@
+[
+  {
+    "name": "stable-diffusion-v1-4",
+    "repo_id": "CompVis/stable-diffusion-v1-4",
+    "revision": "133a221b8aa7292a167afc5127cb63fb5005638b",
+    "source_url": "https://huggingface.co/CompVis/stable-diffusion-v1-4",
+    "required_files": [
+      "model_index.json",
+      "scheduler/scheduler_config.json",
+      "tokenizer/merges.txt",
+      "tokenizer/special_tokens_map.json",
+      "tokenizer/tokenizer_config.json",
+      "tokenizer/vocab.json",
+      "text_encoder/config.json",
+      "text_encoder/model.safetensors",
+      "text_encoder/model.fp16.safetensors",
+      "unet/config.json",
+      "unet/diffusion_pytorch_model.safetensors",
+      "unet/diffusion_pytorch_model.fp16.safetensors",
+      "vae/config.json",
+      "vae/diffusion_pytorch_model.safetensors",
+      "vae/diffusion_pytorch_model.fp16.safetensors"
+    ],
+    "allow_patterns": [
+      "model_index.json",
+      "scheduler/scheduler_config.json",
+      "tokenizer/merges.txt",
+      "tokenizer/special_tokens_map.json",
+      "tokenizer/tokenizer_config.json",
+      "tokenizer/vocab.json",
+      "text_encoder/config.json",
+      "text_encoder/model.safetensors",
+      "text_encoder/model.fp16.safetensors",
+      "unet/config.json",
+      "unet/diffusion_pytorch_model.safetensors",
+      "unet/diffusion_pytorch_model.fp16.safetensors",
+      "vae/config.json",
+      "vae/diffusion_pytorch_model.safetensors",
+      "vae/diffusion_pytorch_model.fp16.safetensors",
+      "README.md",
+      "LICENSE*",
+      "NOTICE*"
+    ]
+  },
+  {
+    "name": "stable-diffusion-safety-checker",
+    "repo_id": "CompVis/stable-diffusion-safety-checker",
+    "revision": "cb41f3a270d63d454d385fc2e4f571c487c253c5",
+    "source_url": "https://huggingface.co/CompVis/stable-diffusion-safety-checker",
+    "required_files": [
+      "config.json",
+      "preprocessor_config.json",
+      "pytorch_model.bin"
+    ],
+    "allow_patterns": [
+      "config.json",
+      "preprocessor_config.json",
+      "pytorch_model.bin",
+      "README.md",
+      "LICENSE*",
+      "NOTICE*"
+    ]
+  },
+  {
+    "name": "clip-vit-large-patch14",
+    "repo_id": "openai/clip-vit-large-patch14",
+    "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+    "source_url": "https://huggingface.co/openai/clip-vit-large-patch14",
+    "required_files": [
+      "config.json",
+      "model.safetensors",
+      "preprocessor_config.json",
+      "merges.txt",
+      "vocab.json",
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "special_tokens_map.json"
+    ],
+    "allow_patterns": [
+      "config.json",
+      "model.safetensors",
+      "preprocessor_config.json",
+      "merges.txt",
+      "vocab.json",
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "special_tokens_map.json",
+      "README.md",
+      "LICENSE*",
+      "NOTICE*"
+    ]
+  }
+]
